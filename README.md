@@ -17,6 +17,7 @@ Clone the repo and run the following commands for the backend and frontend respe
 ### Frontend
 
 `npm install or yarn install`
+
 `npm run dev or yarn dev`
 
 ## Running the tests
