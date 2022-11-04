@@ -9,9 +9,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services
-    .AddAutoMapper(typeof(AddAuthorDto.RequestHandler).Assembly);
-
-builder.Services
     .AddControllers();
 
 builder.Services
