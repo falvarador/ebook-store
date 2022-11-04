@@ -1,5 +1,3 @@
-using FluentValidation;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,14 +9,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services
-    .AddMediatR(typeof(AddNewAuthor.RequestHandler).Assembly)
-    .AddAutoMapper(typeof(AddNewAuthor.RequestHandler).Assembly);
+    .AddAutoMapper(typeof(AddAuthorDto.RequestHandler).Assembly);
 
-builder.Services.AddControllers();
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services
+    .AddControllers();
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services
+    .AddEndpointsApiExplorer()
+    .AddSwaggerGen();
 
 var app = builder.Build();
 

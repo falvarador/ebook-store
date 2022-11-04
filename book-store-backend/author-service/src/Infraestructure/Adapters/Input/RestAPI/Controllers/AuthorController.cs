@@ -1,20 +1,17 @@
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-[ApiController, Route("api/[controller]")]
-public class AuthorsController : ControllerBase
+[ApiController, Route("api/authors")]
+public class AuthorController : ControllerBase
 {
-    private readonly ILogger<AuthorsController> _logger;
-    private readonly IMediator _mediator;
+    private readonly ILogger<AuthorController> _logger;
 
-    public AuthorsController(ILogger<AuthorsController> logger, IMediator mediator)
+    public AuthorController(ILogger<AuthorController> logger)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> AddNewAuthor([FromBody] AddNewAuthor.Request request)
+    public async Task<ActionResult<Unit>> AddNewAuthor([FromBody] AddAuthorDto.Request request)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

@@ -1,4 +1,4 @@
-public class AcademicDegree
+public class AcademicDegree : BaseEntity
 {
     public int Id { get; set; }
 
