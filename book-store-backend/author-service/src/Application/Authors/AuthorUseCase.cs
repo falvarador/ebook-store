@@ -7,6 +7,17 @@ public class AuthorUseCase : IAuthorUseCase
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
+    public async Task<Message> DeleteAsync(string correlationId)
+    {
+        var author = await _unitOfWork.RepositoryType<BookAuthor>()
+           .FindAsync(e => e.CorrelationId.Equals(correlationId));
+
+        _unitOfWork.RepositoryType<BookAuthor>().Remove(author.Id);
+        await _unitOfWork.CommitAsync();
+
+        return new Message();
+    }
+
     public async Task<IEnumerable<AuthorDto>> GetAllAsync()
     {
         var authors = await _unitOfWork.RepositoryType<BookAuthor>()
@@ -35,16 +46,33 @@ public class AuthorUseCase : IAuthorUseCase
         };
     }
 
-    public async Task<Message> InsertAsync(AddAuthorDto addAuthorDto)
+    public async Task<Message> InsertAsync(AddOrUpdateAuthorDto authorDto)
     {
         var bookAuthor = new BookAuthor
         {
-            Name = addAuthorDto.Name,
-            Surname = addAuthorDto.Surname,
-            Birthday = addAuthorDto.Birthday.SetKindUtc()
+            Name = authorDto.Name,
+            Surname = authorDto.Surname,
+            Birthday = authorDto.Birthday.SetKindUtc(),
+            CorrelationId = Guid.NewGuid().ToString()
         };
 
         await _unitOfWork.RepositoryType<BookAuthor>().AddAsync(bookAuthor);
+        await _unitOfWork.CommitAsync();
+
+        return new Message();
+    }
+
+    public async Task<Message> UpdateAsync(string correlationId, AddOrUpdateAuthorDto authorDto)
+    {
+        var bookAuthor = new BookAuthor
+        {
+            Name = authorDto.Name,
+            Surname = authorDto.Surname,
+            Birthday = authorDto.Birthday.SetKindUtc(),
+            CorrelationId = correlationId
+        };
+
+        _unitOfWork.RepositoryType<BookAuthor>().Update(bookAuthor);
         await _unitOfWork.CommitAsync();
 
         return new Message();

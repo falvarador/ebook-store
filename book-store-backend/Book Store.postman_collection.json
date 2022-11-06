@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "b2d23f36-87fb-4cb5-9d0a-0f88b015c292",
+		"name": "Book Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3233969"
+	},
+	"item": [
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5237/api/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5237",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5237/api/authors?correlationId=d5e25a82-0c55-4d3d-91c8-e7121c0ecf5d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5237",
+							"path": [
+								"api",
+								"authors"
+							],
+							"query": [
+								{
+									"key": "correlationId",
+									"value": "d5e25a82-0c55-4d3d-91c8-e7121c0ecf5d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addNew",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Clifford Richardson\",\n    \"surname\": \"Near the cliff and ford\",\n    \"birthday\": \"1968-03-09\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5237/api/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5237",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ronald Miles\",\n    \"surname\": \"Advisor\",\n    \"birthday\": \"1968-03-09\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5237/api/authors?correlationId=d5e25a82-0c55-4d3d-91c8-e7121c0ecf5d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5237",
+							"path": [
+								"api",
+								"authors"
+							],
+							"query": [
+								{
+									"key": "correlationId",
+									"value": "d5e25a82-0c55-4d3d-91c8-e7121c0ecf5d"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

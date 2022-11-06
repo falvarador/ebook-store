@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-public record AddAuthorDto
+public record AddOrUpdateAuthorDto
 {
-    public AddAuthorDto()
+    public AddOrUpdateAuthorDto()
     {
         Name = string.Empty;
         Surname = string.Empty;
