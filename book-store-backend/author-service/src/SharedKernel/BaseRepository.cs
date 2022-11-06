@@ -24,14 +24,14 @@ public class BaseRepository<T> : IRepository<T>
     public T Find(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties)
     {
         if (predicate is null)
-            return Search(includeProperties).SingleOrDefault();
+            return Search(includeProperties).SingleOrDefault() ?? throw new InvalidOperationException("No entity found");
 
-        return Search(predicate, includeProperties).SingleOrDefault();
+        return Search(predicate, includeProperties).SingleOrDefault() ?? throw new InvalidOperationException("No entity found");
     }
 
     public T FindById(params object[] keyValues)
     {
-        return _entitySet.Find(keyValues);
+        return _entitySet.Find(keyValues) ?? throw new InvalidOperationException("No entity found");
     }
 
     public async Task AddAsync(T entity)
@@ -52,17 +52,18 @@ public class BaseRepository<T> : IRepository<T>
         return await Search(predicate, includeProperties).ToListAsync();
     }
 
-    public async Task<T> FindAsync(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties)
+    public async Task<T> FindAsync(Expression<Func<T, bool>>? predicate = null,
+                                    params Expression<Func<T, object>>[] includeProperties)
     {
         if (predicate is null)
-            return await Search(includeProperties).SingleOrDefaultAsync();
+            return await Search(includeProperties).SingleOrDefaultAsync() ?? throw new InvalidOperationException("No entity found");
 
-        return await Search(predicate, includeProperties).SingleOrDefaultAsync();
+        return await Search(predicate, includeProperties).SingleOrDefaultAsync() ?? throw new InvalidOperationException("No entity found");
     }
 
     public async Task<T> FindByIdAsync(params object[] keyValues)
     {
-        return await _entitySet.FindAsync(keyValues);
+        return await _entitySet.FindAsync(keyValues) ?? throw new InvalidOperationException("No entity found");
     }
 
     public void Add(T entity)

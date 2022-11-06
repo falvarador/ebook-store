@@ -9,6 +9,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services
+    .AddScoped<IRepository<BaseEntity>, BaseRepository<BaseEntity>>()
+    .AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services
+    .AddScoped<IAuthorUseCase, AuthorUseCase>();
+
+builder.Services
     .AddControllers();
 
 builder.Services

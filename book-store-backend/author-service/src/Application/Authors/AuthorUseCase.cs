@@ -41,7 +41,7 @@ public class AuthorUseCase : IAuthorUseCase
         {
             Name = addAuthorDto.Name,
             Surname = addAuthorDto.Surname,
-            Birthday = addAuthorDto.Birthday
+            Birthday = addAuthorDto.Birthday.SetKindUtc()
         };
 
         await _unitOfWork.RepositoryType<BookAuthor>().AddAsync(bookAuthor);
