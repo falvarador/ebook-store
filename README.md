@@ -1,6 +1,6 @@
 # Ebook Store
 
-This is a simple ebook store built with NET6 web api and Next JS. It is a work in progress and is not yet complete.
+This is a simple ebook store built with NET6 or Remix web api and Next JS. It is a work in progress and is not yet complete.
 
 ## Getting Started
 
