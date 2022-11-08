@@ -26,7 +26,7 @@ public class AuthorController : ControllerBase
     }
 
     [HttpGet("{correlationId}")]
-    public async Task<ActionResult<AuthorDto>> GetAuthorById([FromQuery] string correlationId)
+    public async Task<ActionResult<AuthorDto>> GetAuthorById(string correlationId)
     {
         return await _authorUseCase.GetAsync(correlationId);
     }

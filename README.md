@@ -32,6 +32,7 @@ This project was built with the following technologies:
 - ASP.NET Core 6
 - Entity Framework Core 6
 - Next JS
+- Remix
 - React
 - TypeScript
 
