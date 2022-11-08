@@ -7,10 +7,21 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import Layout from "./routes/layout";
+
+export const links: Function = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: "https://unpkg.com/@picocss/pico@latest/css/pico.min.css",
+      preloaded: "true",
+    },
+  ];
+};
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Ebook Store",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -22,10 +33,12 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <Layout>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </Layout>
       </body>
     </html>
   );
