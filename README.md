@@ -38,5 +38,5 @@ This project was built with the following technologies:
 
 ## Authors
 
-- Freddy Alvarado Rodríguez
-- Diego Alberto Calderón Arenas
+- *Freddy Alvarado Rodríguez
+- *Diego Alberto Calderón Arenas
