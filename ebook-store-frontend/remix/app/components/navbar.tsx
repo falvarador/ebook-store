@@ -1,6 +1,6 @@
-import { Link } from "@remix-run/react";
+import { Link } from '@remix-run/react'
 
-export function Navbar() {
+export function Navbar () {
   return (
     <nav className="navbar">
       <ul>
@@ -12,5 +12,5 @@ export function Navbar() {
         </li>
       </ul>
     </nav>
-  );
+  )
 }

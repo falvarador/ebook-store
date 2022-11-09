@@ -1,10 +1,13 @@
-import { Navbar } from "~/components/navbar";
+import { Outlet } from '@remix-run/react'
+import { Navbar } from '~/components/navbar'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+// import styles from '~/layout.css'
+
+export default function Layout () {
   return (
-    <section className="container">
+    <section>
       <Navbar />
-      <main>{children}</main>
+      <Outlet />
     </section>
-  );
+  )
 }

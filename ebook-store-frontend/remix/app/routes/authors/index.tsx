@@ -1,3 +1,3 @@
-export default function AuthorsPage() {
-  return <h1>Authors</h1>;
+export default function AuthorsPage () {
+  return <h1>Authors</h1>
 }
