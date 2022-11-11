@@ -12,9 +12,7 @@ export function ErrorBoundary ({ error: { message } }: { error: Error }) {
 export default function Index () {
   return (
     <main>
-      <h1>
-        Home
-      </h1>
+        <h1>Books</h1>
     </main>
   )
 }
