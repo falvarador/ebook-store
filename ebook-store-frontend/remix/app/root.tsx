@@ -3,19 +3,22 @@ import {
   Links,
   LiveReload,
   Meta,
-  Outlet,
   Scripts,
   ScrollRestoration
 } from '@remix-run/react'
 import Layout from '~/routes/layout'
 
-import styles from '~/styles/global.css'
+import styles from '~/styles/app.css'
 
 export const links: Function = () => {
   return [
     {
       rel: 'stylesheet',
-      href: styles,
+      href: styles
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://cdn.simplecss.org/simple.min.css',
       preloaded: 'true'
     }
   ]
@@ -36,7 +39,6 @@ export default function App () {
       </head>
       <body>
         <Layout />
-        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

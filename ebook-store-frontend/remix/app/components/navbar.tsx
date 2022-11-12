@@ -2,15 +2,10 @@ import { Link } from '@remix-run/react'
 
 export function Navbar () {
   return (
-    <nav className="navbar">
-      <ul>
-        <li>
-          <Link to="/">Books</Link>
-        </li>
-        <li>
-          <Link to="/authors">Authors</Link>
-        </li>
-      </ul>
+    <nav className='text-center space-x-4'>
+      <Link to="/">Home</Link>
+      <Link to="/books">Books</Link>
+      <Link to="/authors">Authors</Link>
     </nav>
   )
 }
