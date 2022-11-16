@@ -8,8 +8,14 @@ import {
 } from '@remix-run/react'
 import Layout from '~/routes/layout'
 
+import styles from './styles/app.css'
+
 export const links: Function = () => {
 	return [
+		{
+			rel: 'stylesheet',
+			href: styles,
+		},
 		{
 			rel: 'stylesheet',
 			href: 'https://cdn.simplecss.org/simple.min.css',

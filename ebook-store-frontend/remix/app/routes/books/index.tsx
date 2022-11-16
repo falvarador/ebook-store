@@ -1,9 +1,9 @@
 import { Link } from '@remix-run/react'
 
-export function ErrorBoundary({ error: { message } }: { error: Error }) {
+export function ErrorBoundary() {
 	return (
 		<main>
-			<h4>Page error loading :(</h4>
+			<h4>We can not load the page!!! 😔</h4>
 			<h5>
 				An error was ocurred - lets take you <Link to='/'>home</Link>
 			</h5>
