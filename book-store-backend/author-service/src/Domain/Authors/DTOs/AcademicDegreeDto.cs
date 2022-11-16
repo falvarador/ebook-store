@@ -8,9 +8,6 @@ public record AcademicDegreeDto{
 
     public DateTime? GradeDate { get; set; }
 
-    public int BookAuthorId { get; set; }
-
-    public BookAuthor? BookAuthor { get; set; }
-
+    public string? BookCorrelationId { get; set; }
     public string? CorrelationId { get; set; }
 }

@@ -1,4 +1,4 @@
-public interface ICademicDegreeUseCase
+public interface IAcademicDegreeUseCase
 {
     Task<Message> DeleteAsync(string correlationId);
     Task<IEnumerable<AcademicDegreeDto>> GetAllAsync();
