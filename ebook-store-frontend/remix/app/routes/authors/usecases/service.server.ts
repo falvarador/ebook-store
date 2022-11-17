@@ -24,14 +24,20 @@ export async function createAuthor(author: Author): Promise<Author> {
 	return await response.json()
 }
 
-export async function updateAuthor(author: Author): Promise<Author> {
-	const response = await fetch('http://localhost:5237/api/authors', {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(author),
-	})
+export async function updateAuthor(
+	correlationId: string,
+	author: Author
+): Promise<Author> {
+	const response = await fetch(
+		'http://localhost:5237/api/authors?correlationId=' + correlationId,
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(author),
+		}
+	)
 
 	return await response.json()
 }

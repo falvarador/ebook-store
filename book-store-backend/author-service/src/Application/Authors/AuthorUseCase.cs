@@ -62,19 +62,26 @@ public class AuthorUseCase : IAuthorUseCase
         return new Message();
     }
 
-    public async Task<Message> UpdateAsync(string correlationId, AddOrUpdateAuthorDto authorDto)
+    public async Task<Notifications> UpdateAsync(string correlationId, AddOrUpdateAuthorDto authorDto)
     {
-        var bookAuthor = new BookAuthor
+        var notifications = new Notifications();
+        var bookAuthor = await _unitOfWork.RepositoryType<BookAuthor>()
+                .FindAsync(e => e.CorrelationId.Equals(correlationId));
+
+        if (bookAuthor is null)
         {
-            Name = authorDto.Name,
-            Surname = authorDto.Surname,
-            Birthday = authorDto.Birthday.SetKindUtc(),
-            CorrelationId = correlationId
-        };
+            notifications.Add(new Message(1, Level.Exception, "Author not found"));
+            return notifications;
+        }
+
+        bookAuthor.Name = authorDto.Name;
+        bookAuthor.Surname = authorDto.Surname;
+        bookAuthor.Birthday = authorDto.Birthday.SetKindUtc();
 
         _unitOfWork.RepositoryType<BookAuthor>().Update(bookAuthor);
         await _unitOfWork.CommitAsync();
 
-        return new Message();
+        notifications.Add(new Message(0, Level.Success, "Author updated"));
+        return notifications;
     }
 }

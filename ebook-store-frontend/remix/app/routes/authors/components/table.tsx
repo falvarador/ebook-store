@@ -1,5 +1,6 @@
 import { Link } from '@remix-run/react'
-import { Author } from '~/author/types/author'
+import { Author } from '~/routes/authors/types/author'
+import { toFormatDate } from '~/utils/formats'
 
 export function Table({ authors }: { authors: Author[] }) {
 	return (
@@ -17,7 +18,7 @@ export function Table({ authors }: { authors: Author[] }) {
 					<tr key={author.correlationId}>
 						<td>{author.name}</td>
 						<td>{author.surname}</td>
-						<td>{new Date(author.birthday).toLocaleString('en-US')}</td>
+						<td>{toFormatDate(author.birthday)}</td>
 						<td className='space-x-1'>
 							<Link
 								className='text-cyan-500'

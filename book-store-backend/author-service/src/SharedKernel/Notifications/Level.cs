@@ -23,5 +23,9 @@
     /// <summary>
     /// Stop message
     /// </summary>
-    Stop
+    Stop,
+    /// <summary>
+    /// Success message
+    /// </summary>
+    Success
 }

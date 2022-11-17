@@ -4,5 +4,5 @@ public interface IAuthorUseCase
     Task<IEnumerable<AuthorDto>> GetAllAsync();
     Task<AuthorDto> GetAsync(string correlationId);
     Task<Message> InsertAsync(AddOrUpdateAuthorDto authorDto);
-    Task<Message> UpdateAsync(string correlationId, AddOrUpdateAuthorDto authorDto);
+    Task<Notifications> UpdateAsync(string correlationId, AddOrUpdateAuthorDto authorDto);
 }

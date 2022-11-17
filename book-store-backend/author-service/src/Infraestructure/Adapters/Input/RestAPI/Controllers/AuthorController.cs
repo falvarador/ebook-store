@@ -41,11 +41,13 @@ public class AuthorController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<ActionResult<Message>> UpdateAuthor([FromQuery] string correlationId, [FromBody] AddOrUpdateAuthorDto request)
+    public async Task<ActionResult<Notifications>> UpdateAuthor([FromQuery] string correlationId, [FromBody] AddOrUpdateAuthorDto request)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        return await _authorUseCase.UpdateAsync(correlationId, request);
+        var notifications = await _authorUseCase.UpdateAsync(correlationId, request);
+
+        return notifications.Any() ? BadRequest(notifications) : Ok(notifications);
     }
 }

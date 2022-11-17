@@ -1,26 +1,22 @@
 import { json, LoaderFunction } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import { getAuthors } from '~/author/usecases/service.server'
+import { PageError } from '~/components/page_error'
 import { Table } from './components/table'
-
-type LoaderData = {
-	authors: Awaited<ReturnType<typeof getAuthors>>
-}
+import { LoaderDataList } from './types/loader_data'
+import { getAuthors } from './usecases/service.server'
 
 export const loader: LoaderFunction = async () => {
-	return json<LoaderData>({
+	return json<LoaderDataList>({
 		authors: await getAuthors(),
 	})
 }
 
 export function ErrorBoundary() {
 	return (
-		<main>
-			<h4>Couldn't retrieve authors 😔</h4>
-			<h5>
-				An error was ocurred - lets take you <Link to='/'>home</Link>
-			</h5>
-		</main>
+		<PageError
+			title={`Couldn't retrieve authors`}
+			message='An error was ocurred'
+		/>
 	)
 }
 
@@ -28,12 +24,14 @@ export default function Index() {
 	const { authors } = useLoaderData()
 
 	return (
-		<main>
-			<section className='flex space-x-72'>
-				<h1>Authors</h1>
-				<Link to='/authors/new'>New author</Link>
-			</section>
+		<article>
+			<header>
+				<nav>
+					<strong>Authors</strong>
+					<Link to='/authors/new'>New author</Link>
+				</nav>
+			</header>
 			<Table authors={authors} />
-		</main>
+		</article>
 	)
 }

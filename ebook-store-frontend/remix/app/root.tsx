@@ -8,7 +8,7 @@ import {
 } from '@remix-run/react'
 import Layout from '~/routes/layout'
 
-import styles from './styles/app.css'
+import styles from '~/styles/app.css'
 
 export const links: Function = () => {
 	return [
@@ -18,7 +18,7 @@ export const links: Function = () => {
 		},
 		{
 			rel: 'stylesheet',
-			href: 'https://cdn.simplecss.org/simple.min.css',
+			href: 'https://unpkg.com/@picocss/pico@latest/css/pico.min.css',
 			preloaded: 'true',
 		},
 	]
