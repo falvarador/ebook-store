@@ -13,7 +13,8 @@ builder.Services
     .AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services
-    .AddScoped<IAuthorUseCase, AuthorUseCase>();
+    .AddScoped<IAuthorUseCase, AuthorUseCase>()
+    .AddScoped<IAcademicDegreeUseCase, AcadademicDegreeUseCase>();
 
 builder.Services
     .AddControllers();

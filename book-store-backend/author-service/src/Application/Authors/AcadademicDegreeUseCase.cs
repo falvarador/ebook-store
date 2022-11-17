@@ -1,4 +1,4 @@
-public class AcadademicDegreeUseCase : ICademicDegreeUseCase
+public class AcadademicDegreeUseCase : IAcademicDegreeUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -28,7 +28,7 @@ public class AcadademicDegreeUseCase : ICademicDegreeUseCase
             Name = e.Name,
             School = e.School,
             GradeDate = e.GradeDate,
-            BookAuthorId = e.BookAuthorId,
+            BookCorrelationId = e.BookAuthor.CorrelationId,
             CorrelationId = e.CorrelationId,
         });
     }
@@ -40,23 +40,26 @@ public class AcadademicDegreeUseCase : ICademicDegreeUseCase
 
         return new AcademicDegreeDto
         {
-             Name = academicDegree.Name,
+            Name = academicDegree.Name,
             School = academicDegree.School,
             GradeDate = academicDegree.GradeDate,
-            BookAuthorId = academicDegree.BookAuthorId,
+            BookCorrelationId = academicDegree.BookAuthor.CorrelationId,
             CorrelationId = academicDegree.CorrelationId,
         };
     }
 
     public async Task<Message> InsertAsync(AddOrUpdateAcademicDegreeDto academicDegreeDto)
     {
+        var bookAuthor = await _unitOfWork.RepositoryType<BookAuthor>().FindAsync(author => author.Equals(academicDegreeDto.BookCorrelationId));
+        if (bookAuthor is null) throw new ArgumentNullException(nameof(bookAuthor));
+
         var academicDegree = new AcademicDegree
         {
-             Name = academicDegreeDto.Name,
+            Name = academicDegreeDto.Name,
             School = academicDegreeDto.School,
             GradeDate = academicDegreeDto.GradeDate.SetKindUtc(),
-            BookAuthorId = academicDegreeDto.BookAuthorId,
-            CorrelationId = Guid.NewGuid().ToString()
+            BookAuthorId = bookAuthor.Id,
+            CorrelationId = Guid.NewGuid().ToString(),
         };
 
         await _unitOfWork.RepositoryType<AcademicDegree>().AddAsync(academicDegree);
@@ -67,12 +70,17 @@ public class AcadademicDegreeUseCase : ICademicDegreeUseCase
 
     public async Task<Message> UpdateAsync(string correlationId, AddOrUpdateAcademicDegreeDto academicDegreeDto)
     {
+
+        var bookAuthor = await _unitOfWork.RepositoryType<BookAuthor>().FindAsync(author => author.Equals(academicDegreeDto.BookCorrelationId));
+
+        if (bookAuthor is null) throw new ArgumentNullException(nameof(bookAuthor));
+
         var academicDegree = new AcademicDegree
         {
             Name = academicDegreeDto.Name,
             School = academicDegreeDto.School,
             GradeDate = academicDegreeDto.GradeDate.SetKindUtc(),
-            BookAuthorId = academicDegreeDto.BookAuthorId,
+            BookAuthorId = bookAuthor.Id,
             CorrelationId = correlationId
         };
 
