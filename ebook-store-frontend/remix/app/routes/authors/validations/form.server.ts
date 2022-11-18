@@ -1,5 +1,5 @@
-import { ActionData } from '../types/action_data'
-import { Author } from '../types/author'
+import { ActionData } from '../models/author.server'
+import { Author } from '../models/_author.server'
 
 export function authorFormValidation({
 	name,

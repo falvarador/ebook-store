@@ -2,7 +2,7 @@ import { json, LoaderFunction } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 import { PageError } from '~/components/page_error'
 import { Table } from './components/table'
-import { LoaderDataList } from './types/loader_data'
+import { LoaderDataList } from './models/loader_data'
 import { getAuthors } from './usecases/service.server'
 
 export const loader: LoaderFunction = async () => {

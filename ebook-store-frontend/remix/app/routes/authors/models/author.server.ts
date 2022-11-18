@@ -1,3 +1,27 @@
+export type ActionData =
+	| {
+			surname: null | string
+			name: null | string
+			birthday: null | string
+	  }
+	| undefined
+
+export type LoaderData = {
+	author: Author
+}
+
+export type LoaderDataList = {
+	authors: Author[]
+}
+
+export type AuthorFormProps = {
+	author: Author
+	errors: ActionData
+	isNew: boolean
+	isCreating: boolean
+	isUpdating: boolean
+}
+
 export type Author = {
 	correlationId: string
 	name: string

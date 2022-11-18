@@ -1,9 +1,11 @@
 import type { ActionFunction, LoaderFunction } from '@remix-run/node'
 import { json, redirect } from '@remix-run/node'
 import { useActionData, useLoaderData, useTransition } from '@remix-run/react'
-import { ActionData } from '~/routes/authors/types/action_data'
-import { toAuthor } from '~/routes/authors/types/author'
-import { LoaderData } from '~/routes/authors/types/loader_data'
+import {
+	ActionData,
+	LoaderData,
+	toAuthor,
+} from '~/routes/authors/models/author.server'
 import { Form } from './components/form'
 import {
 	createAuthor,
@@ -13,7 +15,15 @@ import {
 import { authorFormValidation } from './validations/form.server'
 
 export const loader: LoaderFunction = async ({ params }) => {
-	if (params.correlationId === 'new') return json<LoaderData>({} as LoaderData)
+	if (params.correlationId === 'new')
+		return json<LoaderData>({
+			author: {
+				correlationId: 'new',
+				name: '',
+				surname: '',
+				birthday: new Date(),
+			},
+		} as LoaderData)
 
 	const author = await getAuthor(params.correlationId as string)
 
@@ -49,7 +59,7 @@ export default function Index() {
 	const transition = useTransition()
 	const isCreating = transition.submission?.formData.get('intent') === 'create'
 	const isUpdating = transition.submission?.formData.get('intent') === 'update'
-	const isNew = !author?.correlationId
+	const isNew = author?.correlationId === 'new'
 
 	return (
 		<article>

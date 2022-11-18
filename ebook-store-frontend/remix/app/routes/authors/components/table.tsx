@@ -1,8 +1,16 @@
 import { Link } from '@remix-run/react'
-import { Author } from '~/routes/authors/types/author'
 import { toFormatDate } from '~/utils/formats'
+import { Author } from '../models/author.server'
+import { deleteAuthor } from '../usecases/service.server'
 
 export function Table({ authors }: { authors: Author[] }) {
+	const handleClick = async (correlationId: string) => {
+		const notice = confirm('Are you sure?')
+
+		// TODO: This code it's only available in the server, but not in the client
+		if (notice) await deleteAuthor(correlationId)
+	}
+
 	return (
 		<table>
 			<thead>
@@ -26,12 +34,7 @@ export function Table({ authors }: { authors: Author[] }) {
 							>
 								Edit
 							</Link>
-							<Link
-								className='text-cyan-500'
-								to={`/authors/${author.correlationId}`}
-							>
-								Delete
-							</Link>
+							<a onClick={() => handleClick(author.correlationId)}>Delete</a>
 						</td>
 					</tr>
 				))}

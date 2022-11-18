@@ -1,4 +1,4 @@
-import { ActionData } from '~/routes/authors/types/action_data'
+import { ActionData } from '~/routes/authors/models/author.server'
 
 export function ShowError({ value }: { value: string | null | undefined }) {
 	return (

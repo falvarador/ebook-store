@@ -1,8 +1,24 @@
-import { Author } from '../types/author'
+import { Author } from '../models/author.server'
 
 export async function getAuthors(): Promise<Author[]> {
 	const response = await fetch('http://localhost:5237/api/authors')
 	return await response.json()
+}
+
+export async function deleteAuthor(id: string): Promise<void> {
+	const response = await fetch(
+		`http://localhost:5237/api/authors/?correlationId=${id}`,
+		{
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	)
+
+	if (!response.ok) {
+		throw new Error(response.statusText)
+	}
 }
 
 export async function getAuthor(correlationId: string): Promise<Author> {
@@ -29,7 +45,7 @@ export async function updateAuthor(
 	author: Author
 ): Promise<Author> {
 	const response = await fetch(
-		'http://localhost:5237/api/authors?correlationId=' + correlationId,
+		`http://localhost:5237/api/authors?correlationId=${correlationId}`,
 		{
 			method: 'PUT',
 			headers: {
