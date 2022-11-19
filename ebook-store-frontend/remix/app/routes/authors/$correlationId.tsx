@@ -5,14 +5,14 @@ import {
 	ActionData,
 	LoaderData,
 	toAuthor,
-} from '~/routes/authors/models/author.server'
-import { Form } from './components/form'
+} from '~/authors/models/author.server'
 import {
 	createAuthor,
 	getAuthor,
 	updateAuthor,
-} from './usecases/service.server'
-import { authorFormValidation } from './validations/form.server'
+} from '~/authors/usecases/service.server'
+import { Form } from '~/authors/components/form'
+import { authorFormValidation } from '~/authors/validations/form.server'
 
 export const loader: LoaderFunction = async ({ params }) => {
 	if (params.correlationId === 'new')

@@ -1,15 +1,9 @@
-import { Link } from '@remix-run/react'
+import { Link, useFetcher } from '@remix-run/react'
 import { toFormatDate } from '~/utils/formats'
 import { Author } from '../models/author.server'
-import { deleteAuthor } from '../usecases/service.server'
 
 export function Table({ authors }: { authors: Author[] }) {
-	const handleClick = async (correlationId: string) => {
-		const notice = confirm('Are you sure?')
-
-		// TODO: This code it's only available in the server, but not in the client
-		if (notice) await deleteAuthor(correlationId)
-	}
+	const fetcher = useFetcher()
 
 	return (
 		<table>
@@ -34,7 +28,21 @@ export function Table({ authors }: { authors: Author[] }) {
 							>
 								Edit
 							</Link>
-							<a onClick={() => handleClick(author.correlationId)}>Delete</a>
+							<fetcher.Form className='inline' method='post'>
+								<input
+									type='hidden'
+									name='correlationId'
+									value={author.correlationId}
+								/>
+								<button
+									className='bg-cyan-500 text-white px-0 rounded'
+									type='submit'
+									name='intent'
+									value='delete'
+								>
+									Delete
+								</button>
+							</fetcher.Form>
 						</td>
 					</tr>
 				))}

@@ -1,9 +1,18 @@
-import { json, LoaderFunction } from '@remix-run/node'
+import { ActionFunction, json, LoaderFunction, redirect } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
+import { Table } from '~/authors/components/table'
+import { LoaderDataList } from '~/authors/models/author.server'
+import { deleteAuthor, getAuthors } from '~/authors/usecases/service.server'
 import { PageError } from '~/components/page_error'
-import { Table } from './components/table'
-import { LoaderDataList } from './models/loader_data'
-import { getAuthors } from './usecases/service.server'
+
+export const action: ActionFunction = async ({ request }) => {
+	const formData = await request.formData()
+	const correlationId = formData.get('correlationId')
+
+	await deleteAuthor(correlationId as string)
+
+	return redirect('/authors')
+}
 
 export const loader: LoaderFunction = async () => {
 	return json<LoaderDataList>({

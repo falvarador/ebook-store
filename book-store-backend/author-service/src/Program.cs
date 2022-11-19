@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -15,6 +16,17 @@ builder.Services
 builder.Services
     .AddScoped<IAuthorUseCase, AuthorUseCase>()
     .AddScoped<IAcademicDegreeUseCase, AcadademicDegreeUseCase>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost:3000")
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod();
+                      });
+});
 
 builder.Services
     .AddControllers();
@@ -34,6 +46,7 @@ if (app.Environment.IsDevelopment())
 if (app.Environment.IsProduction())
     app.UseHttpsRedirection();
 
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 
 app.MapControllers();
