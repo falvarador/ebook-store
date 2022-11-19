@@ -5,6 +5,20 @@ import { Author } from '../models/author.server'
 export function Table({ authors }: { authors: Author[] }) {
 	const fetcher = useFetcher()
 
+	const handleDelete = (id: string) => {
+		const notice = confirm('Are you sure you want to delete this author?')
+
+		if (notice) {
+			fetcher.submit(
+				{ id },
+				{
+					method: 'post',
+					action: `/authors?index`,
+				}
+			)
+		}
+	}
+
 	return (
 		<table>
 			<thead>
@@ -28,21 +42,12 @@ export function Table({ authors }: { authors: Author[] }) {
 							>
 								Edit
 							</Link>
-							<fetcher.Form className='inline' method='post'>
-								<input
-									type='hidden'
-									name='correlationId'
-									value={author.correlationId}
-								/>
-								<button
-									className='bg-cyan-500 text-white px-0 rounded'
-									type='submit'
-									name='intent'
-									value='delete'
-								>
-									Delete
-								</button>
-							</fetcher.Form>
+							<a
+								onClick={() => handleDelete(author.correlationId)}
+								className='text-red-400'
+							>
+								Delete
+							</a>
 						</td>
 					</tr>
 				))}

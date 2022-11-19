@@ -5,6 +5,7 @@ import {
 	ActionData,
 	LoaderData,
 	toAuthor,
+	initialAuthor,
 } from '~/authors/models/author.server'
 import {
 	createAuthor,
@@ -17,12 +18,7 @@ import { authorFormValidation } from '~/authors/validations/form.server'
 export const loader: LoaderFunction = async ({ params }) => {
 	if (params.correlationId === 'new')
 		return json<LoaderData>({
-			author: {
-				correlationId: 'new',
-				name: '',
-				surname: '',
-				birthday: new Date(),
-			},
+			author: initialAuthor(),
 		} as LoaderData)
 
 	const author = await getAuthor(params.correlationId as string)

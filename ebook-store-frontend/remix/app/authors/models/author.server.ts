@@ -29,6 +29,15 @@ export type Author = {
 	birthday: Date
 }
 
+export function initialAuthor(): Author {
+	return {
+		correlationId: 'new',
+		name: '',
+		surname: '',
+		birthday: new Date(),
+	} as Author
+}
+
 export function toAuthor(formData: FormData): Author {
 	return {
 		correlationId: '',

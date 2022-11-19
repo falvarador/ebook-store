@@ -7,9 +7,9 @@ import { PageError } from '~/components/page_error'
 
 export const action: ActionFunction = async ({ request }) => {
 	const formData = await request.formData()
-	const correlationId = formData.get('correlationId')
+	const correlationId = formData.get('id') as string
 
-	await deleteAuthor(correlationId as string)
+	await deleteAuthor(correlationId)
 
 	return redirect('/authors')
 }
