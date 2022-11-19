@@ -15,21 +15,6 @@ import {
 import { Form } from '~/authors/components/form'
 import { authorFormValidation } from '~/authors/validations/form.server'
 
-export const loader: LoaderFunction = async ({ params }) => {
-	if (params.correlationId === 'new')
-		return json<LoaderData>({
-			author: initialAuthor(),
-		} as LoaderData)
-
-	const author = await getAuthor(params.correlationId as string)
-
-	if (!author) throw new Response('Not Found', { status: 404 })
-
-	return json<LoaderData>({
-		author,
-	})
-}
-
 export const action: ActionFunction = async ({ request, params }) => {
 	const formData = await request.formData()
 	const intent = formData.get('intent')
@@ -46,6 +31,21 @@ export const action: ActionFunction = async ({ request, params }) => {
 		: null
 
 	return redirect(`/authors`)
+}
+
+export const loader: LoaderFunction = async ({ params }) => {
+	if (params.correlationId === 'new')
+		return json<LoaderData>({
+			author: initialAuthor(),
+		} as LoaderData)
+
+	const author = await getAuthor(params.correlationId as string)
+
+	if (!author) throw new Response('Not Found', { status: 404 })
+
+	return json<LoaderData>({
+		author,
+	})
 }
 
 export default function Index() {
