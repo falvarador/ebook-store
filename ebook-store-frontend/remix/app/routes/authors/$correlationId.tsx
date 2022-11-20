@@ -13,7 +13,8 @@ import {
 	updateAuthor,
 } from '~/authors/usecases/service.server'
 import { Form } from '~/authors/components/form'
-import { authorFormValidation } from '~/authors/validations/form.server'
+import authorFormValidation from '~/authors/validations/form.server'
+import { PageError } from '~/components/page_error'
 
 export const action: ActionFunction = async ({ request, params }) => {
 	const formData = await request.formData()
@@ -34,18 +35,29 @@ export const action: ActionFunction = async ({ request, params }) => {
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
-	if (params.correlationId === 'new')
+	const { correlationId = 'new' } = params
+
+	if (correlationId === 'new')
 		return json<LoaderData>({
 			author: initialAuthor(),
 		} as LoaderData)
 
-	const author = await getAuthor(params.correlationId as string)
+	const author = await getAuthor(correlationId)
 
 	if (!author) throw new Response('Not Found', { status: 404 })
 
 	return json<LoaderData>({
 		author,
 	})
+}
+
+export function ErrorBoundary() {
+	return (
+		<PageError
+			title={`Couldn't retrieve the author`}
+			message='An error was ocurred'
+		/>
+	)
 }
 
 export default function Index() {

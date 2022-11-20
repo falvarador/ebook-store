@@ -9,6 +9,7 @@ import {
 import Layout from '~/routes/layout'
 
 import styles from '~/styles/app.css'
+import { PageError } from './components/page_error'
 
 export const links: Function = () => {
 	return [
@@ -29,6 +30,25 @@ export const meta: MetaFunction = () => ({
 	title: 'Ebook Store',
 	viewport: 'width=device-width,initial-scale=1',
 })
+
+export function ErrorBoundary() {
+	return (
+		<html>
+			<head>
+				<title>Oh no!</title>
+				<Meta />
+				<Links />
+			</head>
+			<body>
+				<PageError
+					title='We can not load the page!!!'
+					message='An error was ocurred'
+				/>
+				<Scripts />
+			</body>
+		</html>
+	)
+}
 
 export default function App() {
 	return (
