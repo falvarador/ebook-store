@@ -1,4 +1,4 @@
-export function ShowError({ value }: { value: string | null | undefined }) {
+export function Validation({ value }: { value: string | null | undefined }) {
 	return (
 		<>
 			{value ? (

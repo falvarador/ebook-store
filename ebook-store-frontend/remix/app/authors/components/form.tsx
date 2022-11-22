@@ -1,5 +1,5 @@
 import { Form as RemixForm } from '@remix-run/react'
-import { ShowError } from '~/components/show_error'
+import { Validation } from '~/components/validation'
 import { Submit } from '~/components/submit'
 import { toFormatDate } from '~/utils/formats'
 import { AuthorFormProps } from '../models/author.server'
@@ -20,7 +20,7 @@ export function Form({
 				defaultValue={author?.name}
 				autoComplete='name'
 			/>
-			<ShowError value={errors?.name} />
+			<Validation value={errors?.name} />
 
 			<label>Surname</label>
 			<input
@@ -29,7 +29,7 @@ export function Form({
 				defaultValue={author?.surname}
 				autoComplete='nickname'
 			/>
-			<ShowError value={errors?.surname} />
+			<Validation value={errors?.surname} />
 
 			<label>Birthday</label>
 			<input
@@ -37,7 +37,7 @@ export function Form({
 				name='birthday'
 				defaultValue={toFormatDate(author?.birthday, true)}
 			/>
-			<ShowError value={errors?.birthday} />
+			<Validation value={errors?.birthday} />
 
 			<Submit isNew={isNew} isCreating={isCreating} isUpdating={isUpdating} />
 		</RemixForm>

@@ -14,7 +14,7 @@ import {
 } from '~/authors/usecases/service.server'
 import { Form } from '~/authors/components/form'
 import authorFormValidation from '~/authors/validations/form.server'
-import { PageError } from '~/components/page_error'
+import { Error } from '~/components/error'
 
 export const action: ActionFunction = async ({ request, params }) => {
 	const formData = await request.formData()
@@ -53,7 +53,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export function ErrorBoundary() {
 	return (
-		<PageError
+		<Error
 			title={`Couldn't retrieve the author`}
 			message='An error was ocurred'
 		/>

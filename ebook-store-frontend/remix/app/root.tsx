@@ -9,7 +9,7 @@ import {
 import Layout from '~/routes/layout'
 
 import styles from '~/styles/app.css'
-import { PageError } from './components/page_error'
+import { Error } from './components/error'
 
 export const links: Function = () => {
 	return [
@@ -40,7 +40,7 @@ export function ErrorBoundary() {
 				<Links />
 			</head>
 			<body>
-				<PageError
+				<Error
 					title='We can not load the page!!!'
 					message='An error was ocurred'
 				/>

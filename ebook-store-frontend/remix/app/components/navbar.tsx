@@ -1,23 +1,23 @@
-import { Link } from '@remix-run/react'
+import { NavLink } from '@remix-run/react'
 
 export function Navbar() {
 	return (
 		<nav aria-label='breadcrumb'>
 			<ul>
 				<li>
-					<Link className='dark:visited:text-cyan-400' to='/'>
+					<NavLink className='dark:visited:text-cyan-400' to='/'>
 						Home
-					</Link>
+					</NavLink>
 				</li>
 				<li>
-					<Link className='dark:visited:text-cyan-400' to='/books'>
+					<NavLink className='dark:visited:text-cyan-400' to='/books'>
 						Books
-					</Link>
+					</NavLink>
 				</li>
 				<li>
-					<Link className='dark:visited:text-cyan-400' to='/authors'>
+					<NavLink className='dark:visited:text-cyan-400' to='/authors'>
 						Authors
-					</Link>
+					</NavLink>
 				</li>
 			</ul>
 		</nav>

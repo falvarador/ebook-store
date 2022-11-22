@@ -1,4 +1,8 @@
-import { SubmitProps } from '~/components/types/submit_props'
+type SubmitProps = {
+	isNew: boolean
+	isCreating: boolean
+	isUpdating: boolean
+}
 
 export function Submit({ isNew, isCreating, isUpdating }: SubmitProps) {
 	return (

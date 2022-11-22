@@ -1,12 +1,6 @@
 import { Link } from '@remix-run/react'
 
-export function PageError({
-	title,
-	message,
-}: {
-	title: string
-	message: string
-}) {
+export function Error({ title, message }: { title: string; message: string }) {
 	return (
 		<main className='text-center'>
 			<h4>{title} 😔</h4>
