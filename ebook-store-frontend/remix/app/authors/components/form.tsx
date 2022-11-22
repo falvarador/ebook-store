@@ -11,6 +11,9 @@ export function Form({
 	isCreating,
 	isUpdating,
 }: AuthorFormProps) {
+	const inputStyle =
+		'w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent'
+
 	return (
 		<RemixForm method='post' key={author?.correlationId ?? 'new'}>
 			<label>Name</label>
@@ -19,6 +22,7 @@ export function Form({
 				name='name'
 				defaultValue={author?.name}
 				autoComplete='name'
+				className={`${inputStyle} ${errors?.name ? 'ring-2 ring-red-600' : ''}`}
 			/>
 			<Validation value={errors?.name} />
 
@@ -28,6 +32,9 @@ export function Form({
 				name='surname'
 				defaultValue={author?.surname}
 				autoComplete='nickname'
+				className={`${inputStyle} ${
+					errors?.surname ? 'ring-2 ring-red-600' : ''
+				}`}
 			/>
 			<Validation value={errors?.surname} />
 
@@ -36,6 +43,9 @@ export function Form({
 				type='date'
 				name='birthday'
 				defaultValue={toFormatDate(author?.birthday, true)}
+				className={`${inputStyle} ${
+					errors?.birthday ? 'ring-2 ring-red-600' : ''
+				}`}
 			/>
 			<Validation value={errors?.birthday} />
 
