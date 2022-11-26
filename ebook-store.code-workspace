@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "ebook-store-frontend/remix"
+	},
+	{
+		"path": "ebook-store-frontend/next-js"
+	},
+	{
+		"path": "book-store-backend/author-service"
+	}
+],
+  "settings": {}
+}
