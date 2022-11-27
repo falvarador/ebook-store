@@ -1,34 +1,27 @@
-import type { ActionFunction, LoaderFunction } from '@remix-run/node'
 import { json, redirect } from '@remix-run/node'
 import { useActionData, useLoaderData, useTransition } from '@remix-run/react'
-import {
-	ActionData,
-	LoaderData,
-	toAuthor,
-	initialAuthor,
-} from '~/authors/models/author.server'
-import {
-	createAuthor,
-	getAuthor,
-	updateAuthor,
-} from '~/authors/usecases/service.server'
+import type { ActionFunction, LoaderFunction } from '@remix-run/node'
+
 import { Form } from '~/authors/components/form'
+import * as models from '~/authors/models/author.server'
+import * as usecase from '~/authors/usecases/service.server'
 import authorFormValidation from '~/authors/validations/form.server'
+
 import { Error } from '~/components/error'
 
 export const action: ActionFunction = async ({ request, params }) => {
 	const formData = await request.formData()
 	const intent = formData.get('intent')
-	const author = toAuthor(formData)
+	const author = models.toAuthor(formData)
 
 	const [hasErrors, errors] = authorFormValidation(author)
 
-	if (hasErrors) return json<ActionData>(errors)
+	if (hasErrors) return json<models.ActionData>(errors)
 
 	intent === 'create'
-		? await createAuthor(author)
+		? await usecase.createAuthor(author)
 		: intent === 'update'
-		? await updateAuthor(params.correlationId as string, author)
+		? await usecase.updateAuthor(params.correlationId as string, author)
 		: null
 
 	return redirect(`/authors`)
@@ -38,15 +31,15 @@ export const loader: LoaderFunction = async ({ params }) => {
 	const { correlationId = 'new' } = params
 
 	if (correlationId === 'new')
-		return json<LoaderData>({
-			author: initialAuthor(),
-		} as LoaderData)
+		return json<models.LoaderData>({
+			author: models.initialAuthor(),
+		} as models.LoaderData)
 
-	const author = await getAuthor(correlationId)
+	const author = await usecase.getAuthor(correlationId)
 
 	if (!author) throw new Response('Not Found', { status: 404 })
 
-	return json<LoaderData>({
+	return json<models.LoaderData>({
 		author,
 	})
 }

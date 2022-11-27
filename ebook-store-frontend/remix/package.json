@@ -3,10 +3,8 @@
 	"private": true,
 	"sideEffects": false,
 	"scripts": {
-		"build": "npm run build:css && remix build",
-		"build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
-		"dev": "concurrently \"npm run dev:css\" \"remix dev\"",
-		"dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
+		"build": "remix build",
+		"dev": "remix dev",
 		"start": "remix-serve build",
 		"format": "prettier --write .",
 		"lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ."
@@ -17,30 +15,32 @@
 		"/public/build"
 	],
 	"dependencies": {
+		"@chakra-ui/react": "2.4.1",
+		"@emotion/react": "11.10.5",
+		"@emotion/server": "11.10.0",
+		"@emotion/styled": "11.10.5",
 		"@remix-run/node": "1.7.5",
 		"@remix-run/react": "1.7.5",
 		"@remix-run/serve": "1.7.5",
+		"framer-motion": "6.5.1",
 		"isbot": "3.6.5",
-		"react": "18.2.0",
-		"react-dom": "18.2.0"
+		"react-dom": "18.2.0",
+		"react": "18.2.0"
 	},
 	"devDependencies": {
 		"@remix-run/dev": "1.7.5",
 		"@remix-run/eslint-config": "1.7.5",
-		"@types/react": "18.0.25",
 		"@types/react-dom": "18.0.8",
+		"@types/react": "18.0.25",
 		"@typescript-eslint/eslint-plugin": "5.42.1",
-		"autoprefixer": "10.4.13",
-		"concurrently": "7.5.0",
-		"eslint": "8.27.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-config-standard-with-typescript": "23.0.0",
 		"eslint-plugin-import": "2.26.0",
 		"eslint-plugin-n": "15.5.1",
 		"eslint-plugin-promise": "6.1.1",
+		"eslint-plugin-react-hooks": "4.6.0",
 		"eslint-plugin-react": "7.31.10",
-		"postcss": "8.4.19",
-		"tailwindcss": "3.2.4",
+		"eslint": "8.27.0",
 		"typescript": "4.8.4"
 	},
 	"engines": {

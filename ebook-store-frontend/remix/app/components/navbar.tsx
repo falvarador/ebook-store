@@ -1,25 +1,18 @@
+import { Button, Stack } from '@chakra-ui/react'
 import { NavLink } from '@remix-run/react'
 
 export function Navbar() {
 	return (
-		<nav aria-label='breadcrumb'>
-			<ul>
-				<li>
-					<NavLink className='dark:visited:text-cyan-400' to='/'>
-						Home
-					</NavLink>
-				</li>
-				<li>
-					<NavLink className='dark:visited:text-cyan-400' to='/books'>
-						Books
-					</NavLink>
-				</li>
-				<li>
-					<NavLink className='dark:visited:text-cyan-400' to='/authors'>
-						Authors
-					</NavLink>
-				</li>
-			</ul>
-		</nav>
+		<Stack as='nav' direction='row'>
+			<Button as={NavLink} to='/' variant='link'>
+				Home
+			</Button>
+			<Button as={NavLink} to='/books' variant='link'>
+				Books
+			</Button>
+			<Button as={NavLink} to='/authors' variant='link'>
+				Authors
+			</Button>
+		</Stack>
 	)
 }

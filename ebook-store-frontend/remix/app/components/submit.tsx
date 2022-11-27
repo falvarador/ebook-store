@@ -9,10 +9,10 @@ export function Submit({ isNew, isCreating, isUpdating }: SubmitProps) {
 		<button
 			aria-busy={isCreating || isUpdating}
 			className='bg-picocyan dark:bg-cyan-500'
-			type='submit'
-			name='intent'
-			value={isNew ? 'create' : 'update'}
 			disabled={isCreating || isUpdating}
+			name='intent'
+			type='submit'
+			value={isNew ? 'create' : 'update'}
 		>
 			{isNew ? (isCreating ? 'Creating...' : 'Create') : null}
 			{isNew ? null : isUpdating ? 'Updating...' : 'Update'}

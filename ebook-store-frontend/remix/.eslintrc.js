@@ -7,14 +7,18 @@ module.exports = {
 	extends: [
 		'@remix-run/eslint-config',
 		'@remix-run/eslint-config/node',
+		'eslint-config-prettier',
+		'plugin:react-hooks/recommended',
 		'plugin:react/recommended',
 		'standard-with-typescript',
-		'eslint-config-prettier',
 	],
 	overrides: [],
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
+		ecmaFeatures: {
+			jsx: true,
+		},
 	},
 	plugins: ['react'],
 	rules: {},

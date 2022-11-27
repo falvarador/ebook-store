@@ -1,22 +1,34 @@
-import { RemixBrowser } from '@remix-run/react'
-import { startTransition, StrictMode } from 'react'
+import React, { useState } from 'react'
 import { hydrateRoot } from 'react-dom/client'
 
-function hydrate() {
-	startTransition(() => {
-		hydrateRoot(
-			document,
-			<StrictMode>
-				<RemixBrowser />
-			</StrictMode>
-		)
-	})
+import { RemixBrowser } from '@remix-run/react'
+
+import { CacheProvider } from '@emotion/react'
+
+import { ClientStyleContext } from '~/styles//context'
+import createEmotionCache from '~/styles/createEmotionCache'
+
+interface ClientCacheProviderProps {
+	children: React.ReactNode
 }
 
-if (window.requestIdleCallback) {
-	window.requestIdleCallback(hydrate)
-} else {
-	// Safari doesn't support requestIdleCallback
-	// https://caniuse.com/requestidlecallback
-	window.setTimeout(hydrate, 1)
+function ClientCacheProvider({ children }: ClientCacheProviderProps) {
+	const [cache, setCache] = useState(createEmotionCache())
+
+	function reset() {
+		setCache(createEmotionCache())
+	}
+
+	return (
+		<ClientStyleContext.Provider value={{ reset }}>
+			<CacheProvider value={cache}>{children}</CacheProvider>
+		</ClientStyleContext.Provider>
+	)
 }
+
+hydrateRoot(
+	document,
+	<ClientCacheProvider>
+		<RemixBrowser />
+	</ClientCacheProvider>
+)

@@ -1,8 +1,10 @@
 import { ActionFunction, json, LoaderFunction, redirect } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import { Table } from '~/authors/components/table'
-import { LoaderDataList } from '~/authors/models/author.server'
+
 import { deleteAuthor, getAuthors } from '~/authors/usecases/service.server'
+import { LoaderDataList } from '~/authors/models/author.server'
+import { Table } from '~/authors/components/table'
+
 import { Error } from '~/components/error'
 
 export const action: ActionFunction = async ({ request }) => {
