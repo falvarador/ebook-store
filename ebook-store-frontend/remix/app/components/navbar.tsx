@@ -1,17 +1,17 @@
-import { Button, Stack } from '@chakra-ui/react'
+import { Button, Stack, Text } from '@chakra-ui/react'
 import { NavLink } from '@remix-run/react'
 
 export function Navbar() {
 	return (
 		<Stack as='nav' direction='row'>
 			<Button as={NavLink} to='/' variant='link'>
-				Home
+				<Text>Home</Text>
 			</Button>
 			<Button as={NavLink} to='/books' variant='link'>
-				Books
+				<Text>Books</Text>
 			</Button>
 			<Button as={NavLink} to='/authors' variant='link'>
-				Authors
+				<Text>Authors</Text>
 			</Button>
 		</Stack>
 	)

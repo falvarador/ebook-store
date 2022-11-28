@@ -1,21 +1,26 @@
+import { Button, Stack } from '@chakra-ui/react'
+
+import { RiArrowRightUpLine } from 'react-icons/ri'
+
 type SubmitProps = {
 	isNew: boolean
-	isCreating: boolean
-	isUpdating: boolean
+	isLoading: boolean
 }
 
-export function Submit({ isNew, isCreating, isUpdating }: SubmitProps) {
+export function Submit({ isNew, isLoading }: SubmitProps) {
 	return (
-		<button
-			aria-busy={isCreating || isUpdating}
-			className='bg-picocyan dark:bg-cyan-500'
-			disabled={isCreating || isUpdating}
-			name='intent'
-			type='submit'
-			value={isNew ? 'create' : 'update'}
-		>
-			{isNew ? (isCreating ? 'Creating...' : 'Create') : null}
-			{isNew ? null : isUpdating ? 'Updating...' : 'Update'}
-		</button>
+		<Stack direction='row' spacing={4} paddingTop={6}>
+			<Button
+				isLoading={isLoading}
+				leftIcon={<RiArrowRightUpLine />}
+				loadingText={isNew ? 'Creating...' : 'Updating...'}
+				name='intent'
+				type='submit'
+				value={isNew ? 'create' : 'update'}
+				colorScheme='teal'
+			>
+				{isNew ? 'Create' : 'Update'}
+			</Button>
+		</Stack>
 	)
 }

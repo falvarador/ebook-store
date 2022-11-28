@@ -1,4 +1,4 @@
-import { ActionData, Author } from '../models/author.server'
+import { ActionData, Author } from '~/authors/models/author.server'
 
 export default function authorFormValidation({
 	name,

@@ -18,8 +18,7 @@ export type AuthorFormProps = {
 	author: Author
 	errors: ActionData
 	isNew: boolean
-	isCreating: boolean
-	isUpdating: boolean
+	isLoading: boolean
 }
 
 export type Author = {

@@ -24,23 +24,24 @@
 		"@remix-run/serve": "1.7.5",
 		"framer-motion": "6.5.1",
 		"isbot": "3.6.5",
-		"react-dom": "18.2.0",
-		"react": "18.2.0"
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
 	},
 	"devDependencies": {
 		"@remix-run/dev": "1.7.5",
 		"@remix-run/eslint-config": "1.7.5",
-		"@types/react-dom": "18.0.8",
 		"@types/react": "18.0.25",
+		"@types/react-dom": "18.0.8",
 		"@typescript-eslint/eslint-plugin": "5.42.1",
+		"eslint": "8.27.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-config-standard-with-typescript": "23.0.0",
 		"eslint-plugin-import": "2.26.0",
 		"eslint-plugin-n": "15.5.1",
 		"eslint-plugin-promise": "6.1.1",
-		"eslint-plugin-react-hooks": "4.6.0",
 		"eslint-plugin-react": "7.31.10",
-		"eslint": "8.27.0",
+		"eslint-plugin-react-hooks": "4.6.0",
+		"react-icons": "^4.6.0",
 		"typescript": "4.8.4"
 	},
 	"engines": {

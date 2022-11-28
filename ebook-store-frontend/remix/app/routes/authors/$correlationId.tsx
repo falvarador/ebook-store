@@ -54,23 +54,15 @@ export function ErrorBoundary() {
 }
 
 export default function Index() {
-	const errors = useActionData()
 	const { author } = useLoaderData()
-
+	const errors = useActionData()
 	const transition = useTransition()
-	const isCreating = transition.submission?.formData.get('intent') === 'create'
-	const isUpdating = transition.submission?.formData.get('intent') === 'update'
+
+	const intent = transition.submission?.formData.get('intent')
+	const isLoading = intent === 'create' || intent === 'update'
 	const isNew = author?.correlationId === 'new'
 
 	return (
-		<article>
-			<Form
-				author={author}
-				errors={errors}
-				isNew={isNew}
-				isCreating={isCreating}
-				isUpdating={isUpdating}
-			/>
-		</article>
+		<Form author={author} errors={errors} isLoading={isLoading} isNew={isNew} />
 	)
 }

@@ -1,12 +1,19 @@
-import { Link } from '@remix-run/react'
+import { Center, Link, Text, VStack } from '@chakra-ui/react'
+
+import { Link as RemixLink } from '@remix-run/react'
 
 export function Error({ title, message }: { title: string; message: string }) {
 	return (
-		<main className='text-center'>
-			<h4>{title} 😔</h4>
-			<h5>
-				{message} - lets take you <Link to='/'>home</Link>
-			</h5>
-		</main>
+		<Center>
+			<VStack>
+				<Text fontSize='2xl'>{title} 😔</Text>
+				<Text fontSize='xl'>
+					{message} - lets take you{' '}
+					<Link as={RemixLink} color='yellow.500' to='/'>
+						<Text as='u'>home</Text>
+					</Link>
+				</Text>
+			</VStack>
+		</Center>
 	)
 }

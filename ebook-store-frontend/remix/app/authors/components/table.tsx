@@ -8,11 +8,15 @@ import {
 	Th,
 	Thead,
 	Tr,
+	Icon,
+	Tooltip,
 } from '@chakra-ui/react'
+import { RiDeleteBinLine, RiEditBoxLine } from 'react-icons/ri'
 
 import { Link as RemixLink, useFetcher } from '@remix-run/react'
 
-import { Author } from '../models/author.server'
+import { Author } from '~/authors/models/author.server'
+
 import { toFormatDate } from '~/utils/formats'
 
 export function Table({ authors }: { authors: Author[] }) {
@@ -34,7 +38,7 @@ export function Table({ authors }: { authors: Author[] }) {
 
 	return (
 		<TableContainer>
-			<ChakraTable variant='striped'>
+			<ChakraTable variant='simple'>
 				<Thead>
 					<Tr>
 						<Th>Name</Th>
@@ -51,19 +55,30 @@ export function Table({ authors }: { authors: Author[] }) {
 							<Td>{toFormatDate(author.birthday)}</Td>
 							<Td>
 								<HStack>
-									<Link
-										as={RemixLink}
-										className='text-cyan-500'
-										to={`/authors/${author.correlationId}`}
-									>
-										Edit
+									<Link as={RemixLink} to={`/authors/${author.correlationId}`}>
+										<Tooltip
+											aria-label='A tooltip'
+											hasArrow
+											label='Edit this author'
+										>
+											<span>
+												<Icon as={RiEditBoxLine} />
+											</span>
+										</Tooltip>
 									</Link>
 									<Link
 										color='red.500'
 										onClick={() => handleDelete(author.correlationId)}
-										className='text-red-400'
 									>
-										Delete
+										<Tooltip
+											aria-label='A tooltip'
+											hasArrow
+											label='Delete this author'
+										>
+											<span>
+												<Icon as={RiDeleteBinLine} />
+											</span>
+										</Tooltip>
 									</Link>
 								</HStack>
 							</Td>

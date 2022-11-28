@@ -1,4 +1,4 @@
-import { Author } from '../models/author.server'
+import { Author } from '~/authors/models/author.server'
 
 export async function getAuthors(): Promise<Author[]> {
 	const response = await fetch('http://localhost:5237/api/authors')

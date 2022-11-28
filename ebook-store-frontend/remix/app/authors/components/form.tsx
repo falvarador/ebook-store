@@ -1,55 +1,71 @@
 import { Form as RemixForm } from '@remix-run/react'
-import { Validation } from '~/components/validation'
-import { Submit } from '~/components/submit'
-import { toFormatDate } from '~/utils/formats'
-import { AuthorFormProps } from '../models/author.server'
 
-export function Form({
-	author,
-	errors,
-	isNew,
-	isCreating,
-	isUpdating,
-}: AuthorFormProps) {
-	const inputStyle =
-		'w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent'
+import {
+	FormControl,
+	FormErrorMessage,
+	FormHelperText,
+	FormLabel,
+	Input,
+} from '@chakra-ui/react'
+
+import { Submit } from '~/components/submit'
+
+import { AuthorFormProps } from '~/authors/models/author.server'
+
+import { toFormatDate } from '~/utils/formats'
+
+export function Form(props: AuthorFormProps) {
+	const { author, errors, isNew, isLoading } = props
 
 	return (
 		<RemixForm method='post' key={author?.correlationId ?? 'new'}>
-			<label>Name</label>
-			<input
-				type='text'
-				name='name'
-				defaultValue={author?.name}
-				autoComplete='name'
-				className={`${inputStyle} ${errors?.name ? 'ring-2 ring-red-600' : ''}`}
-			/>
-			<Validation value={errors?.name} />
+			<FormControl
+				as='fieldset'
+				id='name'
+				isRequired
+				isInvalid={!!errors?.name}
+			>
+				<FormLabel>Name</FormLabel>
+				<Input
+					autoComplete='name'
+					defaultValue={author?.name}
+					name='name'
+					placeholder='Enter your full name'
+					type='text'
+				/>
+				<FormErrorMessage>{errors?.name}</FormErrorMessage>
+			</FormControl>
 
-			<label>Surname</label>
-			<input
-				type='text'
-				name='surname'
-				defaultValue={author?.surname}
-				autoComplete='nickname'
-				className={`${inputStyle} ${
-					errors?.surname ? 'ring-2 ring-red-600' : ''
-				}`}
-			/>
-			<Validation value={errors?.surname} />
+			<FormControl
+				as='fieldset'
+				id='surname'
+				isRequired
+				isInvalid={!!errors?.surname}
+			>
+				<FormLabel paddingTop={4}>Surname</FormLabel>
+				<Input
+					autoComplete='name'
+					defaultValue={author?.surname}
+					name='surname'
+					placeholder='Enter your surname'
+					type='text'
+				/>
+				<FormErrorMessage>{errors?.surname}</FormErrorMessage>
+			</FormControl>
 
-			<label>Birthday</label>
-			<input
-				type='date'
-				name='birthday'
-				defaultValue={toFormatDate(author?.birthday, true)}
-				className={`${inputStyle} ${
-					errors?.birthday ? 'ring-2 ring-red-600' : ''
-				}`}
-			/>
-			<Validation value={errors?.birthday} />
+			<FormControl id='birthday' isInvalid={!!errors?.surname}>
+				<FormLabel paddingTop={4}>Birthday</FormLabel>
+				<Input
+					autoComplete='name'
+					defaultValue={toFormatDate(author?.birthday, true)}
+					name='birthday'
+					type='date'
+				/>
+				<FormHelperText>Enter your birthday</FormHelperText>
+				<FormErrorMessage>{errors?.birthday}</FormErrorMessage>
+			</FormControl>
 
-			<Submit isNew={isNew} isCreating={isCreating} isUpdating={isUpdating} />
+			<Submit isNew={isNew} isLoading={isLoading} />
 		</RemixForm>
 	)
 }
