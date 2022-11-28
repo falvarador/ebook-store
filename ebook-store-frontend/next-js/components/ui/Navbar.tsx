@@ -15,7 +15,7 @@ export const Navbar = () => {
 
         {/*Si quiero quitar el menu agregar al box sx={{{xs:'none',sm:'block}'}} */}
         <Box>
-          <NextLink href='/autors' passHref legacyBehavior>
+          <NextLink href='/author' passHref legacyBehavior>
           <Link underline='none' color='white' sx={{mr:1}}>
                 Authors
           </Link>
