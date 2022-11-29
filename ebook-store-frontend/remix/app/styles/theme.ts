@@ -6,6 +6,6 @@ export const theme: ThemeConfig = extendTheme({
 		800: '#153e75',
 		700: '#2a69ac',
 	},
-	initialColorMode: 'dark',
+	initialColorMode: 'light',
 	useSystemColorMode: false,
 })

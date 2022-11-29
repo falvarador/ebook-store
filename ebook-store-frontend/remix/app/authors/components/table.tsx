@@ -10,6 +10,7 @@ import {
 	Tr,
 	Icon,
 	Tooltip,
+	useToast,
 } from '@chakra-ui/react'
 import { RiDeleteBinLine, RiEditBoxLine } from 'react-icons/ri'
 
@@ -21,6 +22,7 @@ import { toFormatDate } from '~/utils/formats'
 
 export function Table({ authors }: { authors: Author[] }) {
 	const fetcher = useFetcher()
+	const toast = useToast()
 
 	const handleDelete = (id: string) => {
 		const notice = confirm('Are you sure you want to delete this author?')
@@ -34,6 +36,14 @@ export function Table({ authors }: { authors: Author[] }) {
 				}
 			)
 		}
+
+		toast({
+			duration: 3000,
+			isClosable: true,
+			position: 'top-right',
+			status: 'success',
+			title: 'Author successfully removed',
+		})
 	}
 
 	return (
