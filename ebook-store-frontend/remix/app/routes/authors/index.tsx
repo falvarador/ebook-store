@@ -1,4 +1,4 @@
-import { Button, HStack, Stack, Text } from '@chakra-ui/react'
+import { Button, Heading, HStack, Stack } from '@chakra-ui/react'
 
 import { ActionFunction, json, LoaderFunction, redirect } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
@@ -34,9 +34,11 @@ export default function Index() {
 	const { authors } = useLoaderData()
 
 	return (
-		<Stack>
+		<Stack as='section'>
 			<HStack justifyContent={'space-between'} paddingBottom={6}>
-				<Text fontSize='2xl'>Authors</Text>
+				<Heading as='h1' fontSize='2xl'>
+					Authors
+				</Heading>
 				<Button as={Link} to='/authors/new'>
 					New author
 				</Button>

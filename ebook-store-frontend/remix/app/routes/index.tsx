@@ -1,9 +1,11 @@
-import { Stack, Text } from '@chakra-ui/react'
+import { Heading, Stack } from '@chakra-ui/react'
 
 export default function Index() {
 	return (
-		<Stack>
-			<Text fontSize='2xl'>Home</Text>
+		<Stack as='section'>
+			<Heading as='h1' fontSize='2xl'>
+				Home
+			</Heading>
 		</Stack>
 	)
 }
