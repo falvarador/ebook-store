@@ -38,7 +38,7 @@ switch (action.type) {
     case '[Author] - DeleteAuthor':
        return {
             ...state,
-            authors:state.authors.filter(author=>author.correlationId ===action.payload)
+            authors:state.authors.filter(author=>author.correlationId !==action.payload)
           }
 
     default:
