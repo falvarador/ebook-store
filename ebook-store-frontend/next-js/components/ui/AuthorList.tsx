@@ -8,6 +8,8 @@ import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+
 import { DataGrid, GridRowModesModel, GridRowParams, MuiEvent, GridEventListener,
    GridRowId, GridRowModes, GridColumns, GridRowModel, GridActionsCellItem, GridToolbarContainer, GridRowsProp } from '@mui/x-data-grid';
 import { AuthorContext } from '../../context/author';
@@ -22,7 +24,7 @@ interface EditToolbarProps {
 
 function EditToolbar(props: EditToolbarProps) {
   const { setRows, setRowModesModel } = props;
-
+/*
   const handleClick = () => {
     const id = '';
     setRows((oldRows) => [...oldRows, { id, name: '', age: '', isNew: true }]);
@@ -32,11 +34,24 @@ function EditToolbar(props: EditToolbarProps) {
     }));
   };
 
+  Esto va donde tengo el nextLink
+  <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
+        Add record....
+      </Button>
+*/
   return (
     <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
-      </Button>
+
+      <Tooltip title='Add Author' placement='top'>
+    	  
+                <NextLink href={`/author/author`} passHref legacyBehavior>
+                  <IconButton color='primary'>
+                    <AddCircleOutlineOutlinedIcon/> Add Author
+                </IconButton>
+
+               </NextLink>
+                    
+                </Tooltip>
     </GridToolbarContainer>
   );
 }

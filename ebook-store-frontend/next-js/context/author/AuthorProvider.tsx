@@ -6,10 +6,12 @@ import { AuthorContext,AuthorReducer } from './';
 
 export interface AuthorState{
 authors:Author[];
+isAddOrUpdate:boolean;
 }
 
 const Author_INITIAL_STATE:AuthorState={
 authors:[],
+isAddOrUpdate:false,
 }
 
 /*
@@ -27,8 +29,67 @@ useEffect(() => {
 }, [])
 
 
-const addNewOrUpdateAuthor =(author: Author)=>{
+const addNewOrUpdateAuthor =async(author: Author)=>{
 
+     try {
+      console.log(author.correlationId);
+    if(author.correlationId!==''){
+        await urlConfigurationApi.put(`/authors?correlationId=${author.correlationId}`,
+                      {
+                        name: author.name,
+                       surname: author.surname,
+                       birthday:author.birthday.toJSON()
+                       });
+
+   dispatch({type:'[Author] - UpdateAuthor',payload:author})
+
+     enqueueSnackbar('Author Updated',{
+      variant:'success',
+      autoHideDuration:2000,
+      anchorOrigin:{
+          vertical:'top',
+          horizontal:'right'
+      }
+
+  })
+    }
+    else
+    {
+        await urlConfigurationApi.post(`/authors`,
+                      {
+                        name: author.name,
+                       surname: author.surname,
+                       birthday:author.birthday.toJSON()
+                       });
+
+   dispatch({type:'[Author] - AddAuthor',payload:author})
+
+     enqueueSnackbar('Author Created',{
+      variant:'success',
+      autoHideDuration:2000,
+      anchorOrigin:{
+          vertical:'top',
+          horizontal:'right'
+      }
+
+  })
+    }
+
+    await LoadAuthors();
+    
+  } catch (error) {
+    console.log(`There is an error trying to load the authors ${error}`);
+
+   enqueueSnackbar(`There is an error trying to load the authors ${error}`,{
+      variant:'error',
+      autoHideDuration:3000,
+      anchorOrigin:{
+          vertical:'top',
+          horizontal:'right'
+      }
+
+  })
+}
 }
 
 
