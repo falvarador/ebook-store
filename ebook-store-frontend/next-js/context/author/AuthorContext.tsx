@@ -4,6 +4,7 @@ import { Author } from '../../model/author/Author';
 
 interface  ContextProps{
      authors:Author[];
+     isAddOrUpdate:boolean;
      addNewOrUpdateAuthor:(author: Author)=> void;
      deleteAuthor:(id: string)=>void;
     

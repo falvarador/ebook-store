@@ -19,11 +19,13 @@ switch (action.type) {
     case '[Author] - AddAuthor':
        return {
             ...state.authors,
+            isAddOrUpdate:true,
               authors:[...state.authors,action.payload]
             }
     case '[Author] - UpdateAuthor':
        return {
             ...state,
+             isAddOrUpdate:true,
               authors: state.authors.map(author=>{
                   if(author.correlationId === action.payload.correlationId){
                       author.birthday = action.payload.birthday;
